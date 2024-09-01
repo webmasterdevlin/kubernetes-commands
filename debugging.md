@@ -1,64 +1,106 @@
-real-time resource usage
-$ kubectl top pods -n <namespace>
-
-general status overview
-$ kubectl get pods -n <namespace>
-
-detailed information
-$ kubectl describe pod <pod-name> -n <namespace>
-
-logs
-$ kubectl logs <pod_name> -n <namespace>
-$ kubectl logs <pod-name> -c <container-name>
-
-stream logs
-$ kubectl logs -f <pod_name> -n <namespace>
-
+### K8S Debugging
+---
+view real-time resource usage
+```bash
+kubectl top pods -n <namespace>
+```
+---
+view general status overview
+```bash
+kubectl get pods -n <namespace>
+```
+---
+view detailed information
+```bash
+kubectl describe pod <pod-name> -n <namespace>
+```
+---
+view logs
+```bash
+kubectl logs <pod_name> -n <namespace>
+```
+---
+```bash
+kubectl logs <pod-name> -c <container-name>
+```
+---
+view stream logs
+```bash
+kubectl logs -f <pod_name> -n <namespace>
+```
+---
 use a yaml file
-$ kubectl apply -f <deployment-yaml>.yaml
-
+```bash
+kubectl apply -f <deployment-yaml>.yaml
+```
+---
 view recent events
-$ kubectl get events -n <namespace> --sort-by='.metadata.creationTimestamp'
-
+```bash
+kubectl get events -n <namespace> --sort-by='.metadata.creationTimestamp'
+```
+---
 restart a pod deployment
-$ kubectl rollout restart deployment <deployment_name> -n <namespace>
-
-info about configmap
-$ kubectl get configmap <configmap-name> -n <namespace>
-
-info about secret
-$ kubectl get secret <secret-name> -n <namespace>
-
-used for debugging and testing purposes
-$ kubectl run -it --rm --image=busybox --namespace=<namespace> debug-pod -- sh
-
+```bash
+kubectl rollout restart deployment <deployment_name> -n <namespace>
+```
+---
+view info about configmap
+```bash
+kubectl get configmap <configmap-name> -n <namespace>
+```
+---
+view info about secret
+```bash
+kubectl get secret <secret-name> -n <namespace>
+```
+---
+debug and test a pod
+```bash
+kubectl run -it --rm --image=busybox --namespace=<namespace> debug-pod -- sh
+```
+---
 execute a command inside a pod
-$ kubectl exec -it <pod_name> -n <namespace> -- <command>
-
-check yaml configuration
-$ kubectl get pod <pod_name> -n <namespace> -o yaml
-
+```bash
+kubectl exec -it <pod_name> -n <namespace> -- <command>
+```
+---
+view yaml configuration
+```bash
+kubectl get pod <pod_name> -n <namespace> -o yaml
+```
+---
 delete a pod
-$ kubectl delete pod <pod_name> -n <namespace>
-
-check node status
-$ kubectl get nodes
-
-check persistent volume claims (PVCs)
-$ kubectl get pvc -n <namespace>
-
-
-if the pod can reach other services or external URLs.
-$ kubectl exec -it <pod_name> -n <namespace> -- curl <service_or_external_url>
-
-
+```bash
+kubectl delete pod <pod_name> -n <namespace>
+```
+---
+view node status
+```bash
+kubectl get nodes
+```
+---
+view persistent volume claims (PVCs)
+```bash
+kubectl get pvc -n <namespace>
+```
+---
+view if the pod can reach other services or external URLs.
+```bash
+kubectl exec -it <pod_name> -n <namespace> -- curl <service_or_external_url>
+```
+---
 check mounting of ConfigMap and Secret usage
-$ kubectl describe pod <pod_name> -n <namespace> | grep -A 5 "Mounts"
-
-
+```bash
+kubectl describe pod <pod_name> -n <namespace> | grep -A 5 "Mounts"
+```
+---
 check service endpoint resolution
-$ kubectl get endpoints <service_name> -n <namespace>
-
-
+```bash
+kubectl get endpoints <service_name> -n <namespace>
+```
+---
 pod scheduling issues
-$ kubectl describe pod <pod_name> -n <namespace> | grep -A 10 "Events"
+```bash
+kubectl describe pod <pod_name> -n <namespace> | grep -A 10 "Events"
+```
+---
